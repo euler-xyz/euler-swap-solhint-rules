@@ -1,5 +1,5 @@
 {
-  "name": "@chainlink/solhint-plugin-chainlink-solidity",
+  "name": "@euler-swap/solhint-plugin-euler-swap",
   "version": "1.2.0",
   "main": "index.js"
 }
