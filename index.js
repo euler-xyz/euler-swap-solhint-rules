@@ -1,4 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const ExplicitReturns = require("./rules/explicitReturns.js");
+const ExplicitReturnTypesSafeCheck = require("./rules/explicitReturnTypesSafeCheck.js");
 
-module.exports = [ExplicitReturns];
+module.exports = [ExplicitReturnTypesSafeCheck];
