@@ -8,6 +8,7 @@ class ExplicitReturnTypesSafeCheck {
   }
 
   FunctionDefinition(ctx) {
+    console.log("ctx", ctx);
     const { returnParameters, body } = ctx;
     // collect all VariableDeclaration nodes with non-null "name" property
     // in the returnParameters array
