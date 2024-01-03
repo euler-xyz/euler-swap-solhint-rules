@@ -26,6 +26,8 @@ class ExplicitReturnTypesSafeCheck {
       // TODO: create an error that we have no named returns?
       return;
     }
+    console.log("typeNames", typeNames);
+    console.log("namedReturns", namedReturns);
 
     // if the typed name is either uint or int throw an error that we need explicit types
     for (let i = 0; i < typeNames.length; i++) {
@@ -49,23 +51,10 @@ class ExplicitReturnTypesSafeCheck {
     }
 
     // check if body has a ReturnStatement with a non-null "expression" property
-    let hasReturn = false;
-    let hasReturnExpression = false;
     const { statements } = body;
-    for (let i = 0; i < statements.length; i++) {
-      const stmt = statements[i];
-      // Functions with named returns in solidity need not have a return statement
-      // they can just assign the named returns a value and fall off the end of the function
-      // we want to warn against that explicitly, hence the check for "ReturnStatement"
-      // and for the expression being separate.
-      if (stmt.type === "ReturnStatement") {
-        hasReturn = true;
-        if (stmt.expression != null) {
-          hasReturnExpression = true;
-          break;
-        }
-      }
-    }
+    const { hasReturn, hasReturnExpression } =
+      checkStatementsHaveReturn(statements);
+
     const returnExprGen = (namedRets) => {
       if (namedRets.length === 1) {
         return namedRets[0];
@@ -93,6 +82,29 @@ class ExplicitReturnTypesSafeCheck {
       return;
     }
   }
+}
+
+function checkStatementsHaveReturn(statements) {
+  let hasReturn = false;
+  for (let i = 0; i < statements.length; i++) {
+    const stmt = statements[i];
+    if (stmt.type === "UncheckedStatement") {
+      const innerStatements = stmt.block.statements;
+      return checkStatementsHaveReturn(innerStatements);
+    }
+    // Functions with named returns in solidity need not have a return statement
+    // they can just assign the named returns a value and fall off the end of the function
+    // we want to warn against that explicitly, hence the check for "ReturnStatement"
+    // and for the expression being separate.
+    if (stmt.type === "ReturnStatement") {
+      hasReturn = true;
+      if (stmt.expression != null) {
+        hasReturnExpression = true;
+        break;
+      }
+    }
+  }
+  return { hasReturn, hasReturnExpression };
 }
 
 module.exports = ExplicitReturnTypesSafeCheck;
