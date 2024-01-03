@@ -11,8 +11,8 @@ mkdir -p "$destination_directory"
 # Function to copy files and directories recursively
 copy_directory() {
   local src="$1"
-  local dest="$2"
-  find "$src" -mindepth 1 -maxdepth 1 -exec cp -r {} "$dest" \;
+  local dest="$2";
+  rsync -a --exclude=".git" "$src/" "$dest"
 }
 
 # Copy the files and directories from the source to the destination
