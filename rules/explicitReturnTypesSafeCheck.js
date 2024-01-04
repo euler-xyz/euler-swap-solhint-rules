@@ -8,7 +8,6 @@ class ExplicitReturnTypesSafeCheck {
   }
 
   FunctionDefinition(ctx) {
-    console.log("ctx", ctx);
     const { returnParameters, body } = ctx;
     // collect all VariableDeclaration nodes with non-null "name" property
     // in the returnParameters array
@@ -26,8 +25,6 @@ class ExplicitReturnTypesSafeCheck {
       // TODO: create an error that we have no named returns?
       return;
     }
-    console.log("typeNames", typeNames);
-    console.log("namedReturns", namedReturns);
 
     // if the typed name is either uint or int throw an error that we need explicit types
     for (let i = 0; i < typeNames.length; i++) {

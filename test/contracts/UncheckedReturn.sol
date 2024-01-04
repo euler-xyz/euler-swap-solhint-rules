@@ -1,11 +1,6 @@
 pragma solidity ^0.8.13;
 
-contract Test {
-    // function abs(int x) external pure returns (int, int) {
-    // return CurveMathLibrary.abs(x);
-    // uint a = 1;
-    // }
-
+contract TestUncheckedBlock {
     function log2(uint256 value) internal pure returns (uint256) {
         uint256 result = 0;
         unchecked {
