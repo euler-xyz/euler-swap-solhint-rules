@@ -5,6 +5,8 @@ source_directory=$(pwd)  # Current working directory
 package_name=$(node -pe "require('./package.json').name" | sed 's/^.*\///')  # Get the package name without the scope from package.json
 destination_directory="$source_directory/node_modules/$package_name"
 
+rm -rf "$destination_directory"
+
 # Create the destination directory if it doesn't exist
 mkdir -p "$destination_directory"
 

@@ -22,7 +22,6 @@ class ExplicitReturnTypesSafeCheck {
     }
     // if there are no named returns, return
     if (typeNames.length === 0) {
-      // TODO: create an error that we have no named returns?
       return;
     }
 
@@ -63,7 +62,7 @@ class ExplicitReturnTypesSafeCheck {
         ctx,
         this.ruleId,
         `Return statements must be written and must explicitly return something; consider "return ${returnExprGen(
-          namedReturns || typeNames
+          namedReturns.length === 0 ? typeNames : namedReturns
         )};"?`
       );
       return;
@@ -73,7 +72,7 @@ class ExplicitReturnTypesSafeCheck {
         ctx,
         this.ruleId,
         `Return statements must explicitly return something; consider "return ${returnExprGen(
-          namedReturns || typeNames
+          namedReturns.length === 0 ? typeNames : namedReturns
         )};"?`
       );
       return;

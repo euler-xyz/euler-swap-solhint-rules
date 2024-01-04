@@ -29,4 +29,16 @@ describe("ExplicitReturnTypesSafeCheck", () => {
       `Return statements must be written and must explicitly return something; consider "return uint256;"?`
     );
   });
+
+  it("should return an error if no return is detected", () => {
+    const explicitTypeMissingContract = fs.readFileSync(
+      "test/contracts/ExplicitTypeMissing.sol",
+      "utf8"
+    );
+    const result = linter.processStr(explicitTypeMissingContract, settings);
+    assert.equal(
+      result.reports[0].message,
+      `Return statements must explicitly return something; consider "returns (uint256)"?`
+    );
+  });
 });
