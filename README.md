@@ -7,6 +7,11 @@ A set of Solhint rules for Euler's Solidity Style Guide.
 ```
 npm init && npm install -D solhint-plugin-euler-swap@github:@euler-xyz/euler-swap-solhint-rules#master --save
 ```
+or 
+
+```
+npm i -D solhint-plugin-euler-swap@npm:@euler-xyz/solhint-plugin-euler-swap 
+```
 
 Specify explicit commit hash to avoid breaking changes.
 
@@ -25,6 +30,8 @@ Create a `.solhint.json` in your root project directory:
 }
 
 ```
+NOTE: The package should be explicitly in solhint-plugin-[package-name] format since solhint searches for `require('solhint-plugin-<package-name>')` in the node_modules folder.
+
 
 Add the following to your `package.json`:
 
@@ -38,12 +45,6 @@ Then, run:
 
 ```
 npm run solhint
-
-./src/controllers/ConstantProductCurveController.sol
-  154:5  warning  Return statements must be written and must explicitly return something; consider "return uint256;"?  euler-swap/explicit-return-types-safe-check
-
-./src/controllers/MultiTokenConstantSumCurveController.sol
-  166:5  warning  Return statements must be written and must explicitly return something; consider "return uint256;"?  euler-swap/explicit-return-types-safe-check
 ```
 
 ## Rules
