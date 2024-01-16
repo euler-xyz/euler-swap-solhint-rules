@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.4.0...v1.4.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* add npmrc ([2f5f3d7](https://github.com/euler-xyz/euler-swap-solhint-rules/commit/2f5f3d72d1e8a2b16df41c4ff9bdd9337373ea2e))
+
+
+
 # [1.4.0](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.3.2...v1.4.0) (2024-01-16)
 
 
