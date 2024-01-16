@@ -45,10 +45,10 @@ jobs:
           # This is needed because we need to install the linting packages
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Authenticate with the GitHub Package Registry
-      #   if: ${{ steps.changelog.outputs.skipped == 'false' }}
-      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >>
-      #     ~/.npmrc
+      - name: Authenticate with the GitHub Package Registry
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >>
+          ~/.npmrc
 
       - name: Github publish package
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
