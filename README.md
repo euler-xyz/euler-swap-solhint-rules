@@ -1,8 +1,6 @@
-# Chainlink Solhint Rules
+# Euler Solhint Rules
 
-A set of Solhint rules for Chainlink's Solidity Style Guide.
-
-[You can find a working Foundry example here](https://github.com/smartcontractkit/chainlink-solhint-rules-example).
+A set of Solhint rules for Euler's Solidity Style Guide.
 
 ## Install to a new project
 
