@@ -1,28 +1,58 @@
-name: Publish CI
+name: Create Release
 
 on:
-  push:
-    branches: [master]
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        type: boolean
+        description: Mark as pre-release?
 
 jobs:
-  publish:
+  create-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@euler-xyz"
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          npm version patch
-          git push
-          git push --tags
-      - run: npm publish --registry=https://npm.pkg.github.com/ --access restricted
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          release-count: 50
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
-          # NOTE: using the built-in GITHUB token here because we're publishing to THIS repository's packages.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          prerelease: ${{ github.event.inputs.prerelease }}
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+
+      - name: Install dependencies
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        run: yarn
+        env:
+          # This is needed because we need to install the linting packages
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Authenticate with the GitHub Package Registry
+      #   if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >>
+      #     ~/.npmrc
+
+      - name: Github publish package
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          registry: "https://npm.pkg.github.com"
