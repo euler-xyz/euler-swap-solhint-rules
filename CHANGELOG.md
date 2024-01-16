@@ -1,3 +1,12 @@
+## [1.6.1](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.6.0...v1.6.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* update readme ([72661eb](https://github.com/euler-xyz/euler-swap-solhint-rules/commit/72661eb313aae7ac776377c2bec77167be829140))
+
+
+
 # [1.6.0](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.5.1...v1.6.0) (2024-01-16)
 
 
