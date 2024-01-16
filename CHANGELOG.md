@@ -1,3 +1,12 @@
+## [1.5.1](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.5.0...v1.5.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* change pakcage name to start with org name ([0fb7a74](https://github.com/euler-xyz/euler-swap-solhint-rules/commit/0fb7a7432e420f048a11357a1195fbcb274e319d))
+
+
+
 # [1.5.0](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.4.1...v1.5.0) (2024-01-16)
 
 
