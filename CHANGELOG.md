@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.4.1...v1.5.0) (2024-01-16)
+
+
+### Features
+
+* do a change to bump version ([286a281](https://github.com/euler-xyz/euler-swap-solhint-rules/commit/286a28144ad594f7dc54a4a0a281ac2d82059900))
+
+
+
 ## [1.4.1](https://github.com/euler-xyz/euler-swap-solhint-rules/compare/v1.4.0...v1.4.1) (2024-01-16)
 
 
