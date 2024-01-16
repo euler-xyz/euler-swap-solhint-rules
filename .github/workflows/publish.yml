@@ -42,11 +42,12 @@ jobs:
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: yarn
         env:
+          # This is needed because we need to install the linting packages
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Authenticate with the GitHub Package Registry
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >>
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >>
           ~/.npmrc
 
       - name: Github publish package
