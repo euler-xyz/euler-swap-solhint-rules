@@ -25,6 +25,15 @@ class ExplicitReturnTypesSafeCheck {
       return;
     }
 
+    if(namedReturns.length > 0) {
+      this.reporter.error(
+        ctx,
+        this.ruleId,
+        `Named return values should be avoided; consider "returns (${typeNames.join(", ")})"?`
+      );
+      return;
+    }
+
     // if the typed name is either uint or int throw an error that we need explicit types
     for (let i = 0; i < typeNames.length; i++) {
       const typeName = typeNames[i];
